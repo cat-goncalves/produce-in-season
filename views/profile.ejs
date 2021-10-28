@@ -1,57 +1,83 @@
 <!doctype html>
 <html>
-<head>
-    <title>Produce Picker</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-<div class="container">
 
-    <div class="page-header text-center">
-        <h1><span class="fa fa-anchor"></span> Profile Page</h1>
-        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+<head>
+  <title>Produce Picker</title>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rampart+One&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+
+  <div class="container">
+
+    <div class="jumbotron page-header text-center">
+      <h1>Seasonal Produce Picker</h1>
     </div>
 
     <div class="row">
 
-        <!-- LOCAL INFORMATION -->
-        <div class="col-sm-6">
-            <div class="well">
-                <h3><span class="fa fa-user"></span> Local</h3>
+      <!-- LOCAL INFORMATION -->
+      <div class="col-sm-6" hidden>
+        <div class="well">
+          <h3><span class="fa fa-user"></span> Local</h3>
 
-                <% if (user.local.email) { %>
-                    <p>
-                        <strong>id</strong>: <%= user._id %><br>
-                        <strong>email</strong>: <%= user.local.email %><br>
-                        <strong>password</strong>: <%= user.local.password %>
-                    </p>
+          <% if (user.local.email) { %>
+            <p>
+              <strong>id</strong>: <%= user._id %><br>
+                <strong>email</strong>: <%= user.local.email %><br>
+                  <strong>password</strong>: <%= user.local.password %>
+            </p>
 
-                    <a href="/unlink/local" class="btn btn-default">Unlink</a>
-                <% } else { %>
-                    <a href="/connect/local" class="btn btn-default">Connect Local</a>
-                <% } %>
+            <a href="/unlink/local" class="btn btn-default">Unlink</a>
+            <% } else { %>
+              <a href="/connect/local" class="btn btn-default">Connect Local</a>
+              <% } %>
 
-            </div>
         </div>
-        <div class="col-sm-6">
-          <h3>In Season Fruits & Veg</h3>
-          <ul class="produce">
+      </div>
+      <div class="col-sm-6">
+        <h3>In Season Fruits & Veg</h3>
+        <ul class="produce">
           <% for(var i=0; i<inRightNow.length; i++) {%>
             <li class="message">
-              <span class="produceName"><%= inRightNow[i].name %></span>
-              <span><%= inRightNow[i].season %></span>
-              <span class="save">save</span>
+              <span class="produceName">
+                <%= inRightNow[i].name %>
+              </span>
+              <span>
+                <%= inRightNow[i].season %>
+              </span>
+              <span class='save'><i class="bi bi-bookmark-plus"></i></span>
             </li>
-          <% } %>
-          </ul>
-
-          <h2>Saved Fruits & Veg</h2>
-
-</div>
-
-<script src="main.js"></script>
+            <% } %>
+        </ul>
+      </div>
+      <div class="col-sm-6">
+        <h3>Saved Fruits & Veg</h3>
+        <ul class="messages">
+          <% for(var i=0; i<produce.length; i++) {%>
+            <li class="message">
+              <span>
+                <%= produce[i].name %>
+              </span>
+              <span>
+                <%= produce[i].season %>
+              </span>
+              <span><i class="bi bi-bookmark-x-fill"></i></span>
+            </li>
+            <% } %>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script src="main.js"></script>
 
 </body>
+
 </html>

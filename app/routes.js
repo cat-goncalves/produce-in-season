@@ -9,13 +9,56 @@ module.exports = function(app, passport, db) {
 
     // PROFILE SECTION =========================
     app.get('/profile', isLoggedIn, function(req, res) {
-      let inSeason = [{name:'apple', season:'october'}, {name:'cauliflower', saeson:'october'}, {name:'pumpkin', season:'october'}]
+      let produce = [{name:'apples',season:'october'}, {name:'cauliflower',season:'october'}, {name:'pumpkin',season:'october'}, {name:'tangerines',season:'november'}, {name:'beets',season:'november'}, {name:'brussels sprouts',season:'november'}, {name:'broccoli',season:'december'}, {name:'grapefruit',season:'december'}, {name:'pomegranate',season:'december'}, {name:'kale',season:'january'}, {name:'lemons',season:'january'}, {name:'parsnips',season:'january'}, {name:'leeks',season:'february'},, {name:'rutabagas',season:'february'},, {name:'cabbage',season:'february'}, {name:'artichokes',season:'march'}, {name:'mushroom',season:'march'},{name:'pineapple',season:'march'}, {name:'asparagus',season:'april'}, {name:'radishes',season:'april'},{name:'spring peas',season:'april'}, {name:'apricots',season:'may'}, {name:'mango',season:'may'}, {name:'swiss chard',season:'may'}, {name:'blueberries',season:'june'}, {name:'corn',season:'june'}, {name:'cantaloupe',season:'june'}, {name:'blackberries',season:'july'},{name:'peppers',season:'july'},{name:'raspberries',season:'july'}, {name:'kiwi',season:'august'},{name:'lettuce',season:'august'},{name:'okra',season:'august'}, {name:'acorn squash',season:'september'},{name:'persimmons',season:'september'},{name:'sweet potato',season:'september'},]
+      const d = new Date();
+      let month = d.getMonth();
+      console.log(month)
+      switch(month){
+        case 1:
+          month = 'january'
+          break;
+        case 2:
+          month = 'february'
+          break;
+        case 3:
+          month = 'march'
+          break;
+        case 4:
+          month = 'april'
+          break;
+        case 5:
+          month = 'may'
+          break; 
+        case 6:
+          month = 'june'
+          break;
+        case 7:
+          month = 'july'
+          break;
+        case 8:
+          month = 'august'
+          break;
+        case 9:
+          month = 'september'
+          break;
+        case 10:
+          month = 'october'
+          break;
+        case 11:
+          month = 'november'
+          break;
+        case 12:
+          month = "december"  
+      }
+      console.log(month)
+      let inSeasonProduce = produce.filter(el => el.season === month)
+      console.log(inSeasonProduce)
         db.collection('produce').find().toArray((err, result) => {
           if (err) return console.log(err)
           res.render('profile.ejs', {
             user : req.user,
             produce: result,
-            inRightNow: inSeason
+            inRightNow: inSeasonProduce
           })
         })
     });
@@ -32,7 +75,7 @@ module.exports = function(app, passport, db) {
       db.collection('produce').save({name: req.body.name, season: req.body.season}, (err, result) => {
         if (err) return console.log(err)
         console.log('saved to database')
-        res.redirect('/profile')
+        res.send({})
       })
     })
 
@@ -51,8 +94,8 @@ module.exports = function(app, passport, db) {
       })
     })
 
-    app.delete('/messages', (req, res) => {
-      db.collection('messages').findOneAndDelete({name: req.body.name, msg: req.body.msg}, (err, result) => {
+    app.delete('/save', (req, res) => {
+      db.collection('produce').findOneAndDelete({name: req.body.name, season: req.body.season}, (err, result) => {
         if (err) return res.send(500, err)
         res.send('Message deleted!')
       })
