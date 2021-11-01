@@ -4,9 +4,9 @@ This app allows the user create a profile and save their favorite produce items 
 
 ## Link to Project: 
 
-![home page screenshot](https://github.com/cat-goncalves/savage-auth/blob/main/public/img/savage-auth-demo.gif?raw=true)
+![home page screenshot](https://github.com/cat-goncalves/produce-in-season/blob/main/public/img/produce-picker-home.png?raw=true)
 
-![produce in season app demo](https://github.com/cat-goncalves/savage-auth/blob/main/public/img/savage-auth-demo.gif?raw=true)
+![produce in season app demo](https://github.com/cat-goncalves/produce-in-season/blob/main/public/img/produce-picker.gif?raw=true)
 
 ## How It's Made:
 Tech used: HTML, CSS, JavaScript, Node.js, Express.js, Microsoft Passport
